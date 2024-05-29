@@ -57,7 +57,7 @@
                 document.getElementById("result").innerText = "Unable to encode all parameters.";
                 return;
             }
-
+         
             // Enviar los datos codificados al servidor
             const response = await fetch('/predict/', {
                 method: 'POST',
@@ -78,7 +78,7 @@
             if (response.ok) {
                 const data = await response.json();
                 // Verificar el resultado de la predicción y mostrar el mensaje correspondiente
-                if (data.result === 0) {
+                if (data.result == 0) {
                     document.getElementById("result").innerText = "Prediction: Peligro alto";
                 } else {
                     document.getElementById("result").innerText = "Prediction: Peligro moderado";
@@ -86,7 +86,6 @@
             } else {
                 document.getElementById("result").innerText = "Error: " + response.statusText;
             }
-
         }
     </script>
 </body>
