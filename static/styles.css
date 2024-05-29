@@ -3,17 +3,21 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Asegura que el contenido se centre verticalmente en la pantalla */
 }
 
 .container {
-    max-width: 400px; /* Reducir el ancho máximo */
-    margin: 50px auto; /* Centrar verticalmente */
+    max-width: 100%; /* Permitir que el contenedor use todo el ancho disponible */
+    margin: 20px; /* Reducir el margen superior */
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
+    box-sizing: border-box; /* Asegura que el padding no exceda el ancho */
 }
 
 h1 {
@@ -29,30 +33,26 @@ label {
     display: block;
     margin-bottom: 5px;
     color: #666;
-    max-width: 100%; 
-    margin: 0 auto;
+    width: 100%; 
+    box-sizing: border-box;
 }
 
-input[type="text"] {
-    width: calc(100% - 1000px); 
+input[type="text"],
+input[type="button"] {
+    width: 100%; /* Ajustar el ancho al 100% del contenedor */
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    max-width: 100%; 
-    margin: 0 auto;
-    
+    box-sizing: border-box; /* Asegura que el padding no exceda el ancho */
 }
 
 input[type="button"] {
-    width: calc(100% - 1000px); 
     padding: 10px;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-    margin: 0 auto; /* Centro el botón horizontalmente */
 }
 
 input[type="button"]:hover {
