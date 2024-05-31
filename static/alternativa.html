@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PREDICCIÓN CONTRA ROBOS DE CELULARES</title>
+    <link rel="stylesheet" href="/static/styles1.css">
+</head>
+<body>
+    <div class="dropdown">
+        <span>OPCIONES</span>
+        <div class="dropdown-content">
+            <a href="/static/index.html">Modelo</a>
+            <a href="/static/instrucciones.html">Instrucciones</a>
+        </div>
+    </div><br>
+    <div>
+        <div class="options">
+            <h2>Elige tu Localidad Preferida:</h2>
+            <select id="param1" class="location-options">
+                <option value="aeropuerto">Aeropuerto</option>
+                <option value="antonio narino">Antonio Nariño</option>
+                <option value="barrios unidos">Barrios Unidos</option>
+                <option value="bosa">Bosa</option>
+                <option value="candelaria">Candelaria</option>
+                <option value="chapinero">Chapinero</option>
+                <option value="ciudad bolivar">Ciudad Bolívar</option>
+                <option value="engativa">Engativá</option>
+                <option value="fontibon">Fontibón</option>
+                <option value="kennedy">Kennedy</option>
+                <option value="martires">Mártires</option>
+                <option value="puente aranda">Puente Aranda</option>
+                <option value="rafael uribe">Rafael Uribe</option>
+                <option value="san cristobal">San Cristóbal</option>
+                <option value="santa fe">Santa Fe</option>
+                <option value="suba">Suba</option>
+                <option value="terminal de transporte">Terminal de Transporte</option>
+                <option value="teusaquillo">Teusaquillo</option>
+                <option value="tunjuelito">Tunjuelito</option>
+                <option value="usaquen">Usaquén</option>
+                <option value="usme">Usme</option>
+            </select>
+            <h2>Selecciona el Día de la Semana:</h2>
+            <select id="param2" class="day-options">
+                <option value="lunes">Lunes</option>
+                <option value="martes">Martes</option>
+                <option value="miércoles">Miércoles</option>
+                <option value="jueves">Jueves</option>
+                <option value="viernes">Viernes</option>
+                <option value="sábado">Sábado</option>
+                <option value="domingo">Domingo</option>
+            </select>
+            <h2>Indica tu Preferencia de Lugar:</h2>
+            <select id="param3" class="place-options">
+                <option value="abierto">Abierto</option>
+                <option value="cerrado">Cerrado</option>
+            </select>
+        </div>
+        <div class="button-container">
+            <input type="button" value="Pulse para predecir" onclick="makePrediction()">
+        <h2>Resultado del modelo:</h2>
+        <p id="result" class="result"></p>
+        </div>
+    </div>
+    <script>
+        async function makePrediction() {
+            const param1 = document.getElementById("param1").value;
+            const param2 = document.getElementById("param2").value;
+            const param3 = document.getElementById("param3").value;
+
+            function encode(value, mapping) {
+                value = value.toLowerCase();
+                if (value in mapping) {
+                    return mapping[value];
+                } else {
+                    return null;
+                }
+            }
+
+            const encodedParam1 = encode(param1, {
+                'aeropuerto': 0, 'antonio narino': 1, 'barrios unidos': 2, 'bosa': 3,
+                'candelaria': 4, 'chapinero': 5, 'ciudad bolivar': 6, 'engativa': 7,
+                'fontibon': 8, 'kennedy': 9, 'martires': 10, 'puente aranda': 11,
+                'rafael uribe': 12, 'san cristobal': 13, 'santa fe': 14, 'suba': 15,
+                'terminal de transporte': 16, 'teusaquillo': 17, 'tunjuelito': 18,
+                'usaquen': 19, 'usme': 20
+            });
+            const encodedParam2 = encode(param2, {
+                'domingo': 0, 'jueves': 1, 'lunes': 2, 'martes': 3,
+                'miercoles': 4, 'nan': 5, 'sabado': 6, 'viernes': 7
+            });
+            const encodedParam3 = encode(param3, {'abierto': 0, 'cerrado': 1});
+
+            if (encodedParam1 === null || encodedParam2 === null || encodedParam3 === null) {
+                document.getElementById("result").innerHTML = "<strong>Por favor, selecciona opciones válidas.</strong>";
+                return;
+            }
+
+            const response = await fetch('/predict/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ params: [encodedParam1, encodedParam2, encodedParam3] }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.result == 0) {
+                    document.getElementById("result").innerHTML = "<strong>Predicción: Peligro alto</strong>";
+                } else {
+                    document.getElementById("result").innerHTML = "<strong>Predicción: Peligro moderado</strong>";
+                }
+            } else {
+                document.getElementById("result").innerHTML = "Error: " + response.statusText;
+            }
+        }
+    </script>
+</body>
+</html>

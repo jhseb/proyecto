@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PREDICCIÓN CONTRA ROBOS DE CELULARES</title>
     <link rel="stylesheet" href="/static/styles.css">
+    
+   
 </head>
 <body>
+    <div class="dropdown">
+        <span>OPCIONES</span>
+        <div class="dropdown-content">
+            <a href="/static/instrucciones.html">Instrucciones</a>
+            <a href="/static/alternativa.html">Alternativa</a>
+        </div>
+    </div><br>
     <div>
+    
     <h1>Digite todos los items del modelo:</h1><br>
     <form id="predictForm">
         <label for="param1">Digite localidad a la que va ir:</label><br>
@@ -54,7 +64,7 @@
 
             // Verificar si algún valor no pudo ser codificado
             if (encodedParam1 === null || encodedParam2 === null || encodedParam3 === null) {
-                document.getElementById("result").innerText = "Unable to encode all parameters.";
+                document.getElementById("result").innerHTML = "<strong>Digite de manera correcta.</strong>";
                 return;
             }
          
@@ -79,9 +89,9 @@
                 const data = await response.json();
                 // Verificar el resultado de la predicción y mostrar el mensaje correspondiente
                 if (data.result == 0) {
-                    document.getElementById("result").innerText = "Prediction: Peligro alto";
+                    document.getElementById("result").innerText = "<strong>Prediction: Peligro alto</strong>";
                 } else {
-                    document.getElementById("result").innerText = "Prediction: Peligro moderado";
+                    document.getElementById("result").innerText = "<strong>Prediction: Peligro moderado</strong>";
                 }
             } else {
                 document.getElementById("result").innerText = "Error: " + response.statusText;

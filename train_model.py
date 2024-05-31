@@ -21,6 +21,3 @@ print("Precisión:", accuracy)
 print(hola)"""
 # Guardar el modelo
 joblib.dump(clf, 'model.joblib')
-
-
-

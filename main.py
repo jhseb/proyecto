@@ -61,10 +61,8 @@ class PredictRequest(BaseModel):
 async def predict(request: PredictRequest):
     # Extraer los parámetros del request
     params = request.params
-    # Realizar la predicción utilizando el modelo cargado
     predictions = model.predict([params])
     
-    # Devolver el resultado como una lista de predicciones
     return {"result": predictions.tolist()}
 
 # Definir la ruta para servir el HTML en "/index"
@@ -76,7 +74,7 @@ async def read_index():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permitir solicitudes de cualquier origen, cambiar según sea necesario
+    allow_origins=["*"],  # Permitir solicitudes de cualquier origen
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
