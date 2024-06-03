@@ -44,10 +44,10 @@
             <select id="param2" class="day-options">
                 <option value="lunes">Lunes</option>
                 <option value="martes">Martes</option>
-                <option value="miércoles">Miércoles</option>
+                <option value="miercoles">Miércoles</option>
                 <option value="jueves">Jueves</option>
                 <option value="viernes">Viernes</option>
-                <option value="sábado">Sábado</option>
+                <option value="sabado">Sábado</option>
                 <option value="domingo">Domingo</option>
             </select>
             <h2>Indica tu Preferencia de Lugar:</h2>
@@ -56,7 +56,7 @@
                 <option value="cerrado">Cerrado</option>
             </select>
         </div>
-        <div class="button-container">
+        <div class="options">
             <input type="button" value="Pulse para predecir" onclick="makePrediction()">
         <h2>Resultado del modelo:</h2>
         <p id="result" class="result"></p>
@@ -86,8 +86,10 @@
                 'usaquen': 19, 'usme': 20
             });
             const encodedParam2 = encode(param2, {
-                'domingo': 0, 'jueves': 1, 'lunes': 2, 'martes': 3,
-                'miercoles': 4, 'nan': 5, 'sabado': 6, 'viernes': 7
+               /* 'domingo': 0, 'jueves': 1, 'lunes': 2, 'martes': 3,
+                'miercoles': 4, 'nan': 5, 'sabado': 6, 'viernes': */
+                'domingo': 0, 'jueves': 1, 'lunes': 2, 'martes': 3, 'miercoles': 4, 'sabado': 5, 'viernes': 6
+
             });
             const encodedParam3 = encode(param3, {'abierto': 0, 'cerrado': 1});
 
@@ -106,13 +108,23 @@
 
             if (response.ok) {
                 const data = await response.json();
+                // Verificar el resultado de la predicción y mostrar el mensaje correspondiente
                 if (data.result == 0) {
-                    document.getElementById("result").innerHTML = "<strong>Predicción: Peligro alto</strong>";
+                    document.getElementById("result").innerHTML = "<strong>Prediccion: Peligro alto</strong>";
+                    
+                    // Cambiar el color de fondo de toda la página a rojo claro
+                    document.getElementById("result").style.backgroundColor = "#FF1111";
+                    document.getElementById("result").style.textAlign = "center"; 
+                    document.getElementById("result").style.color = "#FFFFFF";
+                    document.getElementById("result").style.borderRadius = "10px";
+                    
                 } else {
-                    document.getElementById("result").innerHTML = "<strong>Predicción: Peligro moderado</strong>";
+                    document.getElementById("result").innerHTML = "<strong>Prediccion: Peligro moderado</strong>";
+                    document.getElementById("result").style.backgroundColor = "#FFFF00";
+                    document.getElementById("result").style.color = "#066100";
+                    document.getElementById("result").style.textAlign = "center"; 
+                    document.getElementById("result").style.borderRadius = "10px";
                 }
-            } else {
-                document.getElementById("result").innerHTML = "Error: " + response.statusText;
             }
         }
     </script>

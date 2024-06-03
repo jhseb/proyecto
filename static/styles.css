@@ -71,7 +71,7 @@ input[type="button"]:hover {
     background-color: #f8f9fa;
     border: 1px solid #ced4da;
     border-radius: 4px;
-    font-weight: bold;
+    font-weight: bold; 
 }
 
 .dropdown {
@@ -109,3 +109,9 @@ input[type="button"]:hover {
     color: black; /* Cambia el color del texto al pasar el cursor */
 }
 
+.cuerpo {
+    width: 100%; /* Establece el ancho al 100% */
+    height: 100vh; /* Establece la altura al 100% de la altura de la ventana */
+    margin: 0; /* Elimina cualquier margen */
+    padding: 0; /* Elimina cualquier relleno */
+}

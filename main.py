@@ -45,6 +45,7 @@ import aiofiles
 from fastapi.middleware.cors import CORSMiddleware
 # Cargar el modelo
 model = load("model.joblib")
+model1= load("model1.joblib")
 
 # Inicializar la aplicación FastAPI
 app = FastAPI()
@@ -64,7 +65,15 @@ async def predict(request: PredictRequest):
     predictions = model.predict([params])
     
     return {"result": predictions.tolist()}
-
+"""
+@app.post("/predict1/")
+async def predict(request: PredictRequest):
+    # Extraer los parámetros del request
+    params = request.params
+    predictions = model1.predict([params])
+    
+    return {"result": predictions.tolist()}
+"""
 # Definir la ruta para servir el HTML en "/index"
 @app.get("/index", response_class=HTMLResponse)
 async def read_index():
