@@ -3,54 +3,45 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Asegura que el contenido se centre verticalmente en la pantalla */
     background: linear-gradient(rgba(250,248,243,0.75), rgba(250,248,243,0.75)), url('/static/imagenes/celular2.jpg'); /* URL de la imagen de fondo */
-    background-size: cover; /* La imagen de fondo cubre toda la página */
-    background-position: center;
-    background-repeat: no-repeat;
-           
+    background-size: cover; /* Hace que la imagen de fondo cubra todo el área */
+    background-position: center; /* Centra la imagen de fondo */
+    min-height: 100vh;
 }
 
-.container {
-    max-width: 100%; /* Permitir que el contenedor use todo el ancho disponible */
-    margin: 20px; /* Reducir el margen superior */
-    padding: 20px;
+.options {
+    max-width: 600px;
+    margin: 20px auto;
     background-color: #fff;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    box-sizing: border-box; /* Asegura que el padding no exceda el ancho */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    text-align: center;
-    color: #333;
+.options h2 {
+    margin-bottom: 10px;
 }
 
-form {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    color:  rgba(0, 0, 0, 0.8);
-    width: 100%; 
-    font-weight: bold;
-    box-sizing: border-box;
-}
-
-input[type="text"],
-input[type="button"] {
-    width: 100%; /* Ajustar el ancho al 100% del contenedor */
-    padding: 8px;
+select {
+    width: 100%;
+    padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Asegura que el padding no exceda el ancho */
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+
+select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+    
 }
 
 input[type="button"] {
@@ -61,18 +52,6 @@ input[type="button"] {
     cursor: pointer;
 }
 
-input[type="button"]:hover {
-    background-color: #0056b3;
-}
-
-.result {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-weight: bold; 
-}
 
 .dropdown {
     position: absolute;
@@ -109,25 +88,3 @@ input[type="button"]:hover {
     color: black; /* Cambia el color del texto al pasar el cursor */
 }
 
-.cuerpo {
-    width: 100%; /* Establece el ancho al 100% */
-    height: 100vh; /* Establece la altura al 100% de la altura de la ventana */
-    margin: 0; /* Elimina cualquier margen */
-    padding: 0; /* Elimina cualquier relleno */
-}
-
-select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-}
-
-
-select:focus {
-    outline: none;
-    border-color: #4a90e2;
-    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
-}

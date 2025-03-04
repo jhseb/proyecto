@@ -9,17 +9,28 @@ body {
     min-height: 100vh;
 }
 
+.options {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
 .options h2 {
     margin-bottom: 10px;
 }
 
 select {
-    width: 150px; /* Ancho deseado */
-    height: 30px; /* Altura deseada */
-    font-size: 14px; /* Tamaño de fuente */
-    padding: 2px; /* Espaciado interno */
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
 }
+
 
 select:focus {
     outline: none;
@@ -77,8 +88,3 @@ input[type="button"] {
     color: black; /* Cambia el color del texto al pasar el cursor */
 }
 
-@media (max-width: 768px) {
-    .contenedor {
-        padding: 10px;
-    }
-}

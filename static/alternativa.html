@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="/static/styles1.css">
 </head>
 <body>
-
     <div class="dropdown">
-        <span>OPCIONES A ELEGIR</span>
+        <span>OPCIONES</span>
         <div class="dropdown-content">
             <a href="/static/index.html">Modelo</a>
             <a href="/static/instrucciones.html">Instrucciones</a>
@@ -59,7 +58,7 @@
         </div>
         <div class="options">
             <input type="button" value="Pulse para predecir" onclick="makePrediction()">
-        <h3>Resultado del modelo:</h3>
+        <h2>Resultado del modelo:</h2>
         <p id="result" class="result"></p>
         </div>
     </div>
@@ -112,13 +111,13 @@
                 // Verificar el resultado de la predicción y mostrar el mensaje correspondiente
                 if (data.result == 0) {
                     document.getElementById("result").innerHTML = "<strong>Prediccion: Peligro alto</strong>";
-                    
+
                     // Cambiar el color de fondo de toda la página a rojo claro
                     document.getElementById("result").style.backgroundColor = "#FF1111";
                     document.getElementById("result").style.textAlign = "center"; 
                     document.getElementById("result").style.color = "#FFFFFF";
                     document.getElementById("result").style.borderRadius = "10px";
-                    
+
                 } else {
                     document.getElementById("result").innerHTML = "<strong>Prediccion: Peligro moderado</strong>";
                     document.getElementById("result").style.backgroundColor = "#FFFF00";
