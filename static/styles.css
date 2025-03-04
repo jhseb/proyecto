@@ -115,3 +115,19 @@ input[type="button"]:hover {
     margin: 0; /* Elimina cualquier margen */
     padding: 0; /* Elimina cualquier relleno */
 }
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+
+select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
