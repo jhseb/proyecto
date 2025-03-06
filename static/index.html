@@ -4,72 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PREDICCIÓN CONTRA ROBOS DE CELULARES</title>
-    <link rel="stylesheet" href="/static/styles0.css">
-    
-   
+    <link rel="stylesheet" href="/static/styles1.css">
 </head>
 <body>
     <div class="dropdown">
         <span>OPCIONES</span>
         <div class="dropdown-content">
+            <a href="/static/index.html">Modelo</a>
             <a href="/static/instrucciones.html">Instrucciones</a>
-            <a href="/static/alternativa.html">Alternativa</a>
         </div>
     </div><br>
     <div>
-    
-    <h1>Digite todos los items del modelo:</h1><br>
-    <form id="predictForm">
-        <label for="param1">Digite localidad a la que va ir:</label><br>
-        <input type="text" id="param1" name="param1"><br>
-        <label for="param2">Digite dia de la semana al que desea ir:</label><br>
-        <input type="text" id="param2" name="param2"><br>
-        <label for="param3">Tipo de lugar al que desea ir:</label><br>
-        <input type="text" id="param3" name="param3"><br><br>
-        <input type="button" value="Pulse para predecir" onclick="makePrediction()">
-    </form>
-    <h2>Resultado del modelo:</h2>
-    <p id="result"></p>
+        <div class="options">
+            <h3>Elige tu Localidad Preferida:</h3>
+            <select id="param1" class="location-options">
+                <option value="aeropuerto">Aeropuerto</option>
+                <option value="antonio narino">Antonio Nariño</option>
+                <option value="barrios unidos">Barrios Unidos</option>
+                <option value="bosa">Bosa</option>
+                <option value="candelaria">Candelaria</option>
+                <option value="chapinero">Chapinero</option>
+                <option value="ciudad bolivar">Ciudad Bolívar</option>
+                <option value="engativa">Engativá</option>
+                <option value="fontibon">Fontibón</option>
+                <option value="kennedy">Kennedy</option>
+                <option value="martires">Mártires</option>
+                <option value="puente aranda">Puente Aranda</option>
+                <option value="rafael uribe">Rafael Uribe</option>
+                <option value="san cristobal">San Cristóbal</option>
+                <option value="santa fe">Santa Fe</option>
+                <option value="suba">Suba</option>
+                <option value="terminal de transporte">Terminal de Transporte</option>
+                <option value="teusaquillo">Teusaquillo</option>
+                <option value="tunjuelito">Tunjuelito</option>
+                <option value="usaquen">Usaquén</option>
+                <option value="usme">Usme</option>
+            </select>
+            <h3>Selecciona el Día de la Semana:</h3>
+            <select id="param2" class="day-options">
+                <option value="lunes">Lunes</option>
+                <option value="martes">Martes</option>
+                <option value="miercoles">Miércoles</option>
+                <option value="jueves">Jueves</option>
+                <option value="viernes">Viernes</option>
+                <option value="sabado">Sábado</option>
+                <option value="domingo">Domingo</option>
+            </select>
+            <h3>Indica tu Preferencia de Lugar:</h3>
+            <select id="param3" class="place-options">
+                <option value="abierto">Abierto</option>
+                <option value="cerrado">Cerrado</option>
+            </select>
+        </div>
+        <div class="options">
+            <input type="button" value="Pulse para predecir" onclick="makePrediction()">
+        <h2>Resultado del modelo:</h2>
+        <p id="result" class="result"></p>
+        </div>
     </div>
     <script>
         async function makePrediction() {
-            // Obtener los valores de los campos de entrada
             const param1 = document.getElementById("param1").value;
             const param2 = document.getElementById("param2").value;
             const param3 = document.getElementById("param3").value;
-            function encode(value, mapping) {
 
-            // Verificar si el valor está en el mapeo
-            value = value.toLowerCase();
+            function encode(value, mapping) {
+                value = value.toLowerCase();
                 if (value in mapping) {
                     return mapping[value];
                 } else {
                     return null;
                 }
             }
-            // Codificar los valores utilizando un mapeo predefinido
+
             const encodedParam1 = encode(param1, {
                 'aeropuerto': 0, 'antonio narino': 1, 'barrios unidos': 2, 'bosa': 3,
                 'candelaria': 4, 'chapinero': 5, 'ciudad bolivar': 6, 'engativa': 7,
                 'fontibon': 8, 'kennedy': 9, 'martires': 10, 'puente aranda': 11,
                 'rafael uribe': 12, 'san cristobal': 13, 'santa fe': 14, 'suba': 15,
                 'terminal de transporte': 16, 'teusaquillo': 17, 'tunjuelito': 18,
-                'usaquen': 19, 'usme': 20, 'nan': 21
+                'usaquen': 19, 'usme': 20
             });
             const encodedParam2 = encode(param2, {
-                /*'domingo': 0, 'jueves': 1, 'lunes': 2, 'martes': 3,
-                'miercoles': 4, 'nan': 5, 'sabado': 6, 'viernes': 7*/
+               /* 'domingo': 0, 'jueves': 1, 'lunes': 2, 'martes': 3,
+                'miercoles': 4, 'nan': 5, 'sabado': 6, 'viernes': */
                 'domingo': 0, 'jueves': 1, 'lunes': 2, 'martes': 3, 'miercoles': 4, 'sabado': 5, 'viernes': 6
+
             });
             const encodedParam3 = encode(param3, {'abierto': 0, 'cerrado': 1});
 
-            // Verificar si algún valor no pudo ser codificado
             if (encodedParam1 === null || encodedParam2 === null || encodedParam3 === null) {
-                document.getElementById("result").innerHTML = "<strong>Digite de manera correcta.</strong>";
+                document.getElementById("result").innerHTML = "<strong>Por favor, selecciona opciones válidas.</strong>";
                 return;
             }
-         
-            // Enviar los datos codificados al servidor
+
             const response = await fetch('/predict/', {
                 method: 'POST',
                 headers: {
@@ -78,26 +106,18 @@
                 body: JSON.stringify({ params: [encodedParam1, encodedParam2, encodedParam3] }),
             });
 
-            // Manejar la respuesta del servidor
-           /* if (response.ok) {
-                const data = await response.json();
-                document.getElementById("result").innerText = "Prediction: " + data.result;
-            } else {
-                document.getElementById("result").innerText = "Error: " + response.statusText;
-            }*/
-
             if (response.ok) {
                 const data = await response.json();
                 // Verificar el resultado de la predicción y mostrar el mensaje correspondiente
                 if (data.result == 0) {
                     document.getElementById("result").innerHTML = "<strong>Prediccion: Peligro alto</strong>";
-                    
+
                     // Cambiar el color de fondo de toda la página a rojo claro
                     document.getElementById("result").style.backgroundColor = "#FF1111";
                     document.getElementById("result").style.textAlign = "center"; 
                     document.getElementById("result").style.color = "#FFFFFF";
                     document.getElementById("result").style.borderRadius = "10px";
-                    
+
                 } else {
                     document.getElementById("result").innerHTML = "<strong>Prediccion: Peligro moderado</strong>";
                     document.getElementById("result").style.backgroundColor = "#FFFF00";
@@ -108,6 +128,5 @@
             }
         }
     </script>
-   
 </body>
 </html>
